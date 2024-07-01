@@ -12,7 +12,7 @@ const HistoryPenjualan = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/orders');
+        const response = await axios.get('https://qta-backend.vercel.app/orders');
         setOrders(response.data);
       } catch (error) {
         setError(error.message);

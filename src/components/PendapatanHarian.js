@@ -9,17 +9,19 @@ const PendapatanHarian = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      // If token doesn't exist, redirect to login page
-      return <Navigate to="/" />;
+      // If token doesn't exist, set redirection state to true
+      setRedirectToLogin(true);
+      return;
     }
 
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/orders', {
+        const response = await axios.get('https://qta-backend.vercel.app/orders', {
           headers: {
             Authorization: `Bearer ${token}` // Attach token to the request headers
           }
@@ -34,6 +36,10 @@ const PendapatanHarian = () => {
 
     fetchOrders();
   }, []);
+
+  if (redirectToLogin) {
+    return <Navigate to="/" />;
+  }
 
   if (loading) {
     return <p>Loading...</p>;
@@ -67,9 +73,9 @@ const PendapatanHarian = () => {
   return (
     <div className="flex justify-center">
       <div className="bg-white shadow-lg rounded-lg p-6 m-4 w-fit">
-      <Link to="/dashboard" className="mr-4">
-        <FontAwesomeIcon icon={faArrowLeft} size="lg" />
-      </Link>
+        <Link to="/dashboard" className="mr-4">
+          <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+        </Link>
         <h2 className="text-2xl font-bold mb-4 text-brown-800">Pendapatan Harian</h2>
         <table className="min-w-screen divide-y divide-gray-200">
           <thead className="bg-gray-50">

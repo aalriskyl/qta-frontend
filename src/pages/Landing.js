@@ -12,7 +12,7 @@ const Landing = () => {
     e.preventDefault();
   
     try {
-      const response = await axios.post('http://localhost:5000/user/login', {
+      const response = await axios.post('https://qta-backend.vercel.app/user/login', {
         username,
         password
       });
@@ -22,7 +22,7 @@ const Landing = () => {
         localStorage.setItem('role', response.data.role); // Store user role
   
         // Redirect to dashboard upon successful login
-        window.location.href = '/'; 
+        window.location.href = '/dashboard'; 
       } else {
         console.error('Login failed:', response.data.message);
       }
@@ -76,7 +76,7 @@ const Landing = () => {
             >
               Login
             </button>
-        <a href="/register" className="text-white py-4 cursor-pointer">Register now</a>
+
 
           </form>
         </div>

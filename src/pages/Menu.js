@@ -32,7 +32,7 @@ const Menu = () => {
         items: cart
       };
 
-      const response = await axios.post('http://localhost:5000/orders', orderData, {
+      const response = await axios.post('https://qta-backend.vercel.app/orders', orderData, {
         headers: {
           'Content-Type': 'application/json',
         },
